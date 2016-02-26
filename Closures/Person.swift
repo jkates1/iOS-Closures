@@ -20,16 +20,17 @@ struct Person {
         print("\(self.firstName) is being Initialized")
     }
     
-    //Asynchronous function that takes closure completion argument
+    //Asynchronous function that takes closure callback argument
     func hardProcessingWithString(input: String, completion: (result: String) -> Void) {
     
         //DO work here and when finished callback
         print(input)
-        dispatch_async(dispatch_get_global_queue(0, 0)) {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
             for i in 1...10000 {
             print(i)
             
             }
+            //Print Thread Description to show off main thread
             print("Async Thread \(NSThread.currentThread())")
         completion(result: "Data would be passed back here")
         }
